@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: config-center
+  profiles:
+    active: native
+server:
+  port: 3301

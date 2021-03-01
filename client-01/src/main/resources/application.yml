@@ -1,0 +1,26 @@
+server:
+  port: 5650
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8762/eureka,http://127.0.0.1:8761/eureka
+    healthcheck:
+      enabled: true
+  instance:
+    appname: client-01
+    #服务注册中心实例的主机名
+    hostname: 127.0.0.1
+    instance-id: 客户端-01
+    ip-address: 127.0.0.1
+    #eureka client发送心跳给server端的频率。如果在leaseExpirationDurationInSeconds后，server端没有收到client的心跳，则将摘除该instance
+    lease-renewal-interval-in-seconds: 3
+    #eureka server至上一次收到client的心跳之后，等待下一次心跳的超时时间，在这个时间内若没收到下一次心跳，则将移除该instance
+    lease-expiration-duration-in-seconds: 6
+spring:
+  application:
+    #应用名称
+    name: 客户端-01
+info:
+  app: client-01
+  name: 客户端-01
