@@ -1,6 +1,5 @@
 server:
-  port: 5650
-
+  port: 8003
 eureka:
   client:
     service-url:
@@ -8,7 +7,7 @@ eureka:
     healthcheck:
       enabled: true
   instance:
-    appname: client-01
+    appname: config-client
     #服务注册中心实例的主机名
     hostname: 127.0.0.1
     instance-id: 客户端-01
@@ -17,10 +16,38 @@ eureka:
     lease-renewal-interval-in-seconds: 3
     #eureka server至上一次收到client的心跳之后，等待下一次心跳的超时时间，在这个时间内若没收到下一次心跳，则将移除该instance
     lease-expiration-duration-in-seconds: 6
-spring:
-  application:
-    #应用名称
-    name: 客户端-01
 info:
   app: client-01
   name: 客户端-01
+spring:
+  application:
+    name: config-client
+  profiles:
+    active: dev
+  config:
+    import: optional:configserver:http://127.0.0.1:8769
+  cloud:
+    config:
+      label: ${spring.application.name}
+      name: ${spring.application.name}
+      profile: ${spring.profiles.active}
+    bus:
+      trace:
+        enabled: true
+#  rabbitmq:
+#    host: localhost
+#    port: 5672
+#    username: guest
+#    password: guest
+#  cloud:
+#    config:
+#      uri: http://127.0.0.1:8769
+#      fail-fast: true
+#      profile: dev
+#      enabled: true
+#      label: ""
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

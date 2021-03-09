@@ -1,0 +1,5 @@
+#作为eureka-client的dev配置
+foo: foo version 1
+env:
+  name: vvvaavavavavavavasasas
+  password: dev123456
